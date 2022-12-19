@@ -12,7 +12,7 @@ var app = express(); //const cors=require("cors");
 var _require = require('./config/key'),
     MONGOURI = _require.MONGOURI;
 
-var PORT = 4000;
+var PORT = process.env.PORT || 4000;
 mongoose.connect(MONGOURI);
 mongoose.connection.on('connected', function () {
   console.log("mongoose db got connected");

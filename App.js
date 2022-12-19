@@ -5,7 +5,7 @@ const upload=multipart()
 const app=express();
 //const cors=require("cors");
 const {MONGOURI}=require('./config/key')
-const PORT=4000;
+const PORT=process.env.PORT || 4000;
 
 
 
