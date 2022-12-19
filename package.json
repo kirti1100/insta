@@ -4,11 +4,11 @@
   "description": "",
   "main": "App.js",
   "scripts": {
-   "start": "node App.js",
+    "start": "node App.js",
     "client": "npm start --prefix frontend",
     "clientinstall": "npm install --prefix frontend",
     "dev": "concurrently \"npm run App\" \"npm run frontend\"",
-   "render-postbuild": "NPM_CONFIG_PRODUCTION= false npm install --prefix frontend && npm run build --prefix frontend"
+    "render-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
   "author": "",
   "license": "ISC",
