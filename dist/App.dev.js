@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 var multipart = require('multer');
 
 var upload = multipart();
-var app = express();
+var app = express(); //const cors=require("cors");
 
 var _require = require('./config/key'),
     MONGOURI = _require.MONGOURI;
@@ -21,7 +21,11 @@ mongoose.connection.on('error', function (err) {
   console.log("error", err);
 });
 app.use(express.json());
-app.use(upload.any());
+app.use(upload.any()); // app.use(cors(
+//     {
+//         origin:["http://localhost:3000/","http://mern-stack-app.onrender.com"]
+//     }
+// ));
 
 require('./models/User');
 
@@ -34,7 +38,17 @@ app.use(require('./router/user'));
 var middleware = function middleware(req, res, next) {
   console.log("middleware called!");
   next();
-}; //app.use(middleware)
+};
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express["static"]('frontend/build'));
+
+  var path = require('path');
+
+  app.get('*', function (req, res) {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+  });
+} //app.use(middleware)
 // app.get('/',(req,res)=>{
 //     res.send("hello world")
 // })
