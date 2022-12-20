@@ -25,7 +25,7 @@ mongoose.connection.on('error', function (err) {
 app.use(express.json());
 app.use(upload.any());
 app.use(cors({
-  origin: ["http://localhost:3000/", "https://insta-clone-apps.onrender.com/", "https://insta-clone-apps-api.onrender.com"]
+  origin: ["http://localhost:3000", "https://insta-clone-apps.onrender.com/", "https://insta-clone-apps-api.onrender.com/"]
 }));
 
 require('./models/User');
