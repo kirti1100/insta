@@ -24,8 +24,7 @@ const SignIn = () => {
         email,
       }),
     })
-      .then((res) => res.json())
-
+      .then((res) =>console.log("res",res))
       .then((data) => {
         if(data.error){
           toast(data.error, { hideProgressBar: true, autoClose: 2000, type: 'error' ,position:'top-right' })
