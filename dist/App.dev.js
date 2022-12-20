@@ -7,7 +7,9 @@ var mongoose = require('mongoose');
 var multipart = require('multer');
 
 var upload = multipart();
-var app = express(); //const cors=require("cors");
+var app = express();
+
+var cors = require("cors");
 
 var _require = require('./config/key'),
     MONGOURI = _require.MONGOURI;
@@ -21,11 +23,10 @@ mongoose.connection.on('error', function (err) {
   console.log("error", err);
 });
 app.use(express.json());
-app.use(upload.any()); // app.use(cors(
-//     {
-//         origin:["http://localhost:3000/","http://mern-stack-app.onrender.com"]
-//     }
-// ));
+app.use(upload.any());
+app.use(cors({
+  origin: ["http://localhost:3000/", "https://insta-clone-apps.onrender.com/"]
+}));
 
 require('./models/User');
 
