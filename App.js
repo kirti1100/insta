@@ -45,13 +45,13 @@ if(process.env.NODE_ENV ==="production"){
     })
 
 }
-//app.use(middleware)
-// app.get('/',(req,res)=>{
-//     res.send("hello world")
-// })
-// app.get('/home',middleware,(req,res)=>{
-//     res.send("home page")
-// })
+app.use(middleware)
+app.get('/',(req,res)=>{
+    res.send("hello world")
+})
+app.get('/home',middleware,(req,res)=>{
+    res.send("home page")
+})
 
 app.listen(PORT,()=>{
     console.log("running thr server on ",PORT)

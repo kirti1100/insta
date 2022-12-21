@@ -53,15 +53,15 @@ if (process.env.NODE_ENV === "production") {
   app.get('*', function (req, res) {
     res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
   });
-} //app.use(middleware)
-// app.get('/',(req,res)=>{
-//     res.send("hello world")
-// })
-// app.get('/home',middleware,(req,res)=>{
-//     res.send("home page")
-// })
+}
 
-
+app.use(middleware);
+app.get('/', function (req, res) {
+  res.send("hello world");
+});
+app.get('/home', middleware, function (req, res) {
+  res.send("home page");
+});
 app.listen(PORT, function () {
   console.log("running thr server on ", PORT);
 });
