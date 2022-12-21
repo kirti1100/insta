@@ -2,6 +2,7 @@ import React, { useState ,useContext} from "react";
 import { Link ,useNavigate} from "react-router-dom";
 import {UserContext} from '../App';
 import {toast} from "react-toastify"
+import {baseURL} from '../App'
 const SignIn = () => {
   const {state,dispatch}=useContext(UserContext);
   const [password, setPassword] = useState("");
@@ -14,9 +15,8 @@ const SignIn = () => {
       return window.alert("invalid email")
     }
     console.log("hello");
-    fetch("/signin", {
+    fetch(baseURL+"/signin", {
       method: "post",
-      mode: "no-cors",
       headers: {
         "Content-Type": "application/json",
       },

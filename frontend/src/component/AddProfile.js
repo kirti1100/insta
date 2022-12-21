@@ -1,7 +1,7 @@
 import React, { useState ,useEffect,useContext} from "react";
 import {useNavigate,Link} from "react-router-dom";
 import {toast} from "react-toastify"
-import {UserContext} from "../App"
+import {UserContext,baseURL} from "../App"
 
 const AddProfile=()=>{
         const[file,setFile]=useState("")
@@ -11,9 +11,8 @@ const AddProfile=()=>{
 
         useEffect(()=>{
             if(url){
-            fetch("/createprofile", {
+            fetch(baseURL+"/createprofile", {
                 method: "put",
-                mode: "no-cors",
                 headers: {
                   "Content-Type": "application/json",
                   "Authorization":"bearer "+localStorage.getItem("jwt")
@@ -50,7 +49,6 @@ const AddProfile=()=>{
             data.append("cloud_name","dgzgu6c24")
             fetch("https://api.cloudinary.com/v1_1/dgzgu6c24/image/upload",{
                 method:"post",
-                mode: "no-cors",
                 body:data
             }).then(res=>res.json())
             .then(data1=>{

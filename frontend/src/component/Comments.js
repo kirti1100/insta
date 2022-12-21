@@ -1,12 +1,12 @@
 import React ,{useState,useContext}from 'react'
-import {UserContext} from "../App"
+import {UserContext,baseURL} from "../App"
 const Comments=()=>{
     const{state}=useContext(UserContext)
     const [data,setData]=useState(state)
     const commentPost=(id,text)=>{
-        fetch("/comment",{
+        fetch(baseURL+"/comment",{
             method:"put",
-            mode: "no-cors",
+           
             headers:{
                 "Content-Type":"application/json",
                 "Authorization":"bearer "+localStorage.getItem("jwt")
@@ -29,9 +29,8 @@ const Comments=()=>{
         commentPost(state._id,event.target[0].value)
     }
     const deleteComment=(commentId)=>{
-        fetch(`/deleteComment/${commentId}`,{
+        fetch(baseURL+`/deleteComment/${commentId}`,{
             method:"delete",
-            mode: "no-cors",
             headers:{
                 "Authorization":"bearer "+localStorage.getItem("jwt")
             }

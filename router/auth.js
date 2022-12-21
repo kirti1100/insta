@@ -26,7 +26,7 @@ router.post('/signup', (req, res) => {
     })
         .then((saveduser) => {
             if (saveduser) {
-                res.status(422).json({
+                return res.status(422).json({
                     error: "email already exist"
                 })
             } else {
@@ -41,7 +41,7 @@ router.post('/signup', (req, res) => {
                         user.save()
                             .then(user => {
                                 const token=JWT.sign({_id:user._id},JWT_SCRET)
-                                res.status(200).json({
+                                return res.status(200).json({
                                     message: "successfully posted",
                                     token,
                                     user
@@ -67,7 +67,7 @@ router.post('/signup', (req, res) => {
 router.post('/signin',(req,res)=>{
     const {email,password}=req.body
     if(!email || !password){
-        res.status(422).json({error:"please provide email or password"})
+        return res.status(422).json({error:"please provide email or password"})
     }
     User.findOne({email:email})
     .then(saveduser=>{
@@ -80,10 +80,10 @@ router.post('/signin',(req,res)=>{
                 console.log("saveduser",saveduser)
                 const token=JWT.sign({_id:saveduser._id},JWT_SCRET)
                 const {_id,name,email, picture,followers,following}=saveduser
-                res.json({token,user:{_id,name,email,followers,following, picture}})
+                return res.json({token,user:{_id,name,email,followers,following, picture}})
                 
             }else{
-                res.status(422).json({error:"invalid email or password"})
+               return  res.status(422).json({error:"invalid email or password"})
             }
         })
         .catch(err=>{

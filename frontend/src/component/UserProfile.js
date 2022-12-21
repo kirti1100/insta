@@ -1,12 +1,12 @@
 import React ,{useState,useEffect,useContext}from 'react'
-import {UserContext} from "../App"
+import {UserContext,baseURL} from "../App"
 import {useParams} from "react-router-dom"
 const UserProfile = () => {
     const {state,dispatch}=useContext(UserContext)
     const [profile,setProfile]=useState(null)
     const {userId}=useParams()
     useEffect(()=>{
-        fetch(`/user/${userId}`,{
+        fetch(baseURL+`/user/${userId}`,{
             headers:{
                 "Authorization":"bearer "+localStorage.getItem("jwt")
             }
@@ -18,7 +18,7 @@ const UserProfile = () => {
     },[])
 
     const followers=()=>{
-        fetch("/follow",{
+        fetch(baseURL+"/follow",{
             method:"put",
             headers:{
                 "Authorization":"bearer "+localStorage.getItem("jwt"),
@@ -43,7 +43,7 @@ const UserProfile = () => {
     }
 
     const unFollow=()=>{
-        fetch("/unFollow",{
+        fetch(baseURL+"/unFollow",{
             method:"put",
             headers:{
                 "Authorization":"bearer "+localStorage.getItem("jwt"),

@@ -1,6 +1,7 @@
 import React, { useState ,useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify"
+import {baseURL} from '../App'
 const CreatPost = () => {
     const [title,setTitle]=useState("")
     const[body,setBody]=useState("")
@@ -9,9 +10,8 @@ const CreatPost = () => {
     const navigate=useNavigate();
     useEffect(()=>{
         if(url){
-        fetch("/createpost", {
+        fetch(baseURL+"/createpost", {
             method: "post",
-            mode: "no-cors",
             headers: {
               "Content-Type": "application/json",
               "Authorization":"bearer "+localStorage.getItem("jwt")
@@ -47,7 +47,6 @@ const CreatPost = () => {
         data.append("cloud_name","dgzgu6c24")
         fetch("https://api.cloudinary.com/v1_1/dgzgu6c24/image/upload",{
             method:"post",
-            mode: "no-cors",
             body:data
         }).then(res=>res.json())
         .then(data1=>{

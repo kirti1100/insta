@@ -15,7 +15,7 @@ import Comments from './component/Comments'
 import AddProfile  from './component/AddProfile'
 
 export const UserContext = createContext();
-
+export const baseURL= process.env.REACT_APP_SERVER_URL
 
 const Routing=()=>{
   const {state,dispatch}=useContext(UserContext);
@@ -50,6 +50,7 @@ const Routing=()=>{
 
 function App() {
   const[state,dispatch]=useReducer(reducer,intialState)
+  
   return (
     <UserContext.Provider value={{state,dispatch}}>
     <BrowserRouter>

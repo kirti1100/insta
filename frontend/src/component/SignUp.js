@@ -1,7 +1,7 @@
 import React, { useState ,useContext} from "react";
 import { Link ,useNavigate} from "react-router-dom";
 import {toast} from "react-toastify"
-import {UserContext} from '../App';
+import {UserContext,baseURL} from '../App';
 
 const SignUp = () => {
   const {state,dispatch}=useContext(UserContext);
@@ -16,9 +16,8 @@ const SignUp = () => {
       return window.alert("invalid email")
     }
     console.log("hello");
-    fetch("/signup", {
+    fetch(baseURL+"/signup", {
       method: "post",
-      mode: "no-cors",
       headers: {
         "Content-Type": "application/json",
       },

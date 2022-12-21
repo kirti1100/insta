@@ -1,5 +1,5 @@
 import React ,{useState,useEffect,useContext}from 'react'
-import {UserContext} from "../App"
+import {UserContext,baseURL} from "../App"
 import {useNavigate,Link} from "react-router-dom"
 
 const Home = () => {
@@ -7,9 +7,8 @@ const Home = () => {
     const [data,setData]=useState([])
     const{state,dispatch}=useContext(UserContext)
     useEffect(()=>{
-        fetch("/allpost",{
+        fetch(baseURL+"/allpost",{
             method:"get",
-            mode: "no-cors",
             headers:{
                 "Authorization":"bearer "+localStorage.getItem("jwt")
             }
@@ -19,9 +18,8 @@ const Home = () => {
         })
     },[])
     const likePost=(id)=>{
-        fetch("/likes",{
+        fetch(baseURL+"/likes",{
             method:"put",
-            mode: "no-cors",
             headers:{
                 "Content-Type":"application/json",
                 "Authorization":"bearer "+localStorage.getItem("jwt")
@@ -43,8 +41,8 @@ const Home = () => {
           })
     }
     const unLikePost=(id)=>{
-        fetch("/unLike",{
-            mode: "no-cors",
+        fetch(baseURL+"/unLike",{
+           
             method:"put",
             headers:{
                 "Content-Type":"application/json",
@@ -74,7 +72,7 @@ const Home = () => {
    }
    const deletePost=(postId)=>{
     console.log("deleted",typeof(postId))
-    fetch(`/delete/${postId}`,{
+    fetch(baseURL+`/delete/${postId}`,{
         method:"delete",
         headers:{
             "Authorization":"bearer "+localStorage.getItem("jwt")

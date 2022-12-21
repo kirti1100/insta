@@ -37,7 +37,7 @@ router.post('/signup', function (req, res) {
     email: email
   }).then(function (saveduser) {
     if (saveduser) {
-      res.status(422).json({
+      return res.status(422).json({
         error: "email already exist"
       });
     } else {
@@ -52,7 +52,7 @@ router.post('/signup', function (req, res) {
           var token = JWT.sign({
             _id: user._id
           }, JWT_SCRET);
-          res.status(200).json({
+          return res.status(200).json({
             message: "successfully posted",
             token: token,
             user: user
@@ -74,7 +74,7 @@ router.post('/signin', function (req, res) {
       password = _req$body2.password;
 
   if (!email || !password) {
-    res.status(422).json({
+    return res.status(422).json({
       error: "please provide email or password"
     });
   }
@@ -100,7 +100,7 @@ router.post('/signin', function (req, res) {
             picture = saveduser.picture,
             followers = saveduser.followers,
             following = saveduser.following;
-        res.json({
+        return res.json({
           token: token,
           user: {
             _id: _id,
@@ -112,7 +112,7 @@ router.post('/signin', function (req, res) {
           }
         });
       } else {
-        res.status(422).json({
+        return res.status(422).json({
           error: "invalid email or password"
         });
       }

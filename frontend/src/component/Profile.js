@@ -1,12 +1,12 @@
 import React ,{useState,useEffect,useContext}from 'react'
 import { Link } from 'react-router-dom'
-import {UserContext} from "../App"
+import {UserContext,baseURL} from "../App"
 const Profile = () => {
     const {state,dispatch}=useContext(UserContext)
     const [posts,setPosts]=useState(null)
     useEffect(()=>{
-        fetch("/mypost",{
-            mode: "no-cors",
+        fetch(baseURL+"/mypost",{
+           
             headers:{
                 "Authorization":"bearer "+localStorage.getItem("jwt")
             }
