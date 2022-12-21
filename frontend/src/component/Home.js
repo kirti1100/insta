@@ -8,6 +8,8 @@ const Home = () => {
     const{state,dispatch}=useContext(UserContext)
     useEffect(()=>{
         fetch("/allpost",{
+            method:"get",
+            mode: "no-cors",
             headers:{
                 "Authorization":"bearer "+localStorage.getItem("jwt")
             }
@@ -19,6 +21,7 @@ const Home = () => {
     const likePost=(id)=>{
         fetch("/likes",{
             method:"put",
+            mode: "no-cors",
             headers:{
                 "Content-Type":"application/json",
                 "Authorization":"bearer "+localStorage.getItem("jwt")
@@ -41,6 +44,7 @@ const Home = () => {
     }
     const unLikePost=(id)=>{
         fetch("/unLike",{
+            mode: "no-cors",
             method:"put",
             headers:{
                 "Content-Type":"application/json",

@@ -6,6 +6,7 @@ const Comments=()=>{
     const commentPost=(id,text)=>{
         fetch("/comment",{
             method:"put",
+            mode: "no-cors",
             headers:{
                 "Content-Type":"application/json",
                 "Authorization":"bearer "+localStorage.getItem("jwt")
@@ -30,6 +31,7 @@ const Comments=()=>{
     const deleteComment=(commentId)=>{
         fetch(`/deleteComment/${commentId}`,{
             method:"delete",
+            mode: "no-cors",
             headers:{
                 "Authorization":"bearer "+localStorage.getItem("jwt")
             }

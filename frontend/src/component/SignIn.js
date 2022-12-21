@@ -16,6 +16,7 @@ const SignIn = () => {
     console.log("hello");
     fetch("/signin", {
       method: "post",
+      mode: "no-cors",
       headers: {
         "Content-Type": "application/json",
       },

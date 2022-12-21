@@ -13,6 +13,7 @@ const AddProfile=()=>{
             if(url){
             fetch("/createprofile", {
                 method: "put",
+                mode: "no-cors",
                 headers: {
                   "Content-Type": "application/json",
                   "Authorization":"bearer "+localStorage.getItem("jwt")
@@ -49,6 +50,7 @@ const AddProfile=()=>{
             data.append("cloud_name","dgzgu6c24")
             fetch("https://api.cloudinary.com/v1_1/dgzgu6c24/image/upload",{
                 method:"post",
+                mode: "no-cors",
                 body:data
             }).then(res=>res.json())
             .then(data1=>{

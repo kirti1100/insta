@@ -6,6 +6,7 @@ const Profile = () => {
     const [posts,setPosts]=useState(null)
     useEffect(()=>{
         fetch("/mypost",{
+            mode: "no-cors",
             headers:{
                 "Authorization":"bearer "+localStorage.getItem("jwt")
             }

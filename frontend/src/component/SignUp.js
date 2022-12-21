@@ -18,6 +18,7 @@ const SignUp = () => {
     console.log("hello");
     fetch("/signup", {
       method: "post",
+      mode: "no-cors",
       headers: {
         "Content-Type": "application/json",
       },

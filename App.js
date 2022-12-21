@@ -18,11 +18,14 @@ mongoose.connection.on('error',(err)=>{
 })
 app.use(express.json())
 app.use(upload.any())
+
 app.use(cors(
     {
         origin:'*',
         optionsSuccessStatus: 200,
-        methods: ["GET","PUT","POST","DELETE"]
+        allowedHeaders:'*',
+        credentials:true,
+        methods: ["GET","PUT","POST","HEAD","OPTIONS","PATCH","DELETE"]
     }
 ));
 require('./models/User')
