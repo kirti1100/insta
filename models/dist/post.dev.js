@@ -31,5 +31,7 @@ var postschema = new mongoose.Schema({
       ref: "User"
     }
   }]
+}, {
+  timestamps: true
 });
 mongoose.model('Post', postschema);

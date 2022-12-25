@@ -12,8 +12,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import {intialState,reducer} from "./reducers/userReducer";
 import Comments from './component/Comments'
-import AddProfile  from './component/AddProfile'
-
+import AddProfile  from './component/AddProfile';
+import SearchUser from './component/SearchUser';
 export const UserContext = createContext();
 export const baseURL= process.env.REACT_APP_SERVER_URL
 
@@ -43,6 +43,7 @@ const Routing=()=>{
       <Route path="/comment" element={<Comments/>}/>
       <Route path="/userProfile/:userId" element={<UserProfile/>}/>
       <Route path="/addProfile" element={<AddProfile/>}/>
+      <Route path="/searchUser" element={<SearchUser/>}/>
     </Routes>
   )
 }

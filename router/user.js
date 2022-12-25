@@ -6,6 +6,14 @@ const Post=mongoose.model('Post')
 const requireLogin=require('../middleware/requireLogin')
 const User= mongoose.model('User')
 
+
+// router.get("/deletemodel",(req,res)=>{
+//     User.deleteMany({ }).then(res=>{
+//         console.log("deleted")
+//     })
+// })
+
+
 router.get("/user/:userId",requireLogin,(req,res)=>{
     User.findOne({_id:req.params.userId})
     .select("-password")
@@ -24,6 +32,7 @@ router.get("/user/:userId",requireLogin,(req,res)=>{
 })
 
 router.put("/follow",requireLogin,(req,res)=>{
+    
     console.log("req.user",req.user)
     User.findByIdAndUpdate(req.body.followId,{
         $push:{followers:req.user._id}
@@ -85,5 +94,14 @@ router.put('/createprofile',requireLogin,(req,res)=>{
             }
             return res.json(response)
         })
+})
+router.post('/search',requireLogin,(req,res)=>{
+    const userPattern=new RegExp('^'+req.body.query)
+    User.find({email:{$regex:userPattern}})
+    .then(posts=>{
+        return res.json({post:posts})
+    }).catch(err=>{
+        console.log(err)
+    })
 })
 module.exports=router

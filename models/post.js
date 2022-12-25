@@ -32,5 +32,5 @@ const postschema=new mongoose.Schema({
         }
 
     ]
-})
+},{timestamps:true})
 mongoose.model('Post',postschema)

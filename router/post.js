@@ -9,8 +9,9 @@ router.get('/allpost',requireLogin,(req,res)=>{
     Post.find()
     .populate('postedby','_id name')
     .populate("comments.postedby","_id name")
+    .sort("-createdAt")
     .then(posts=>{
-        res.json({posts})
+        return res.json({posts})
     })
 })
 
@@ -18,8 +19,9 @@ router.get('/mypost',requireLogin,(req,res)=>{
     Post.find({postedby:req.user._id})
     .populate('postedby','_id name')
     .populate("comments.postedby","_id name")
+    .sort("-createdAt")
     .then(myposts=>{
-        res.json({myposts})
+        return res.json({myposts})
     })
     .catch(err=>{
         console.log(err)
@@ -40,7 +42,7 @@ router.post('/createpost',requireLogin,(req,res)=>{
         postedby:req.user
     })
     post.save().then(result=>{
-        res.json({post:result})
+       return  res.json({post:result})
     })
     .catch(err=>{
         console.log("error",err)
@@ -95,6 +97,7 @@ router.put("/comment",requireLogin,(req,res)=>{
         new:true
     }).populate('comments.postedby','_id name')
     .populate('postedby','_id name')
+    .sort("-createdAt")
     .exec((err,result)=>{
         if(err){
             return res.status(422).json(err)

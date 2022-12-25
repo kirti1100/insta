@@ -13,9 +13,25 @@ var brypt = require('bcryptjs');
 var JWT = require('jsonwebtoken');
 
 var _require = require('../config/key'),
-    JWT_SCRET = _require.JWT_SCRET;
+    JWT_SCRET = _require.JWT_SCRET,
+    SEND_EMAIL_KEY = _require.SEND_EMAIL_KEY;
 
-var RequireLogin = require('../middleware/requireLogin');
+var RequireLogin = require('../middleware/requireLogin'); // const nodemailer=require("nodemailer")
+// const sendgridtransport=require("nodemailer-sendgrid-transport")
+// const transport=nodemailer.createTransport(sendgridtransport({
+//     auth:{
+//         api_key:SEND_EMAIL_KEY
+//     }
+// }))
+// const transport=nodemailer.createTransport({
+//     host: 'smtp.ethereal.email',
+//     port: 587,
+//     auth: {
+//         user:"" ,
+//         pass: 'fVnukwywJCsPsUV4yy'
+//     }
+// })
+
 
 router.get('/protective', RequireLogin, function (req, res) {
   res.send("hello user");
@@ -51,7 +67,18 @@ router.post('/signup', function (req, res) {
         user.save().then(function (user) {
           var token = JWT.sign({
             _id: user._id
-          }, JWT_SCRET);
+          }, JWT_SCRET); // transport.sendMail({
+          //     to:user.email,
+          //     from: "kirtigoyal444@gmail.com",
+          //     subject: "signup successfully",
+          //     text:"hello user",
+          //     html: "<h1>welcome to instagram </h1>"
+          // }).then(res=>{
+          //     console.log(res,"email sent")
+          // }).catch(err=>{
+          //     console.log(err)
+          // })
+
           return res.status(200).json({
             message: "successfully posted",
             token: token,

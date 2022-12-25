@@ -7,11 +7,17 @@ const NavBar = () => {
   const routingList=()=>{
     if(state){
       return [
-        <Link  className="nav-link active" to="/profile">Profile</Link>,
-        <Link  className="nav-link active" to="/create" >Create Post</Link>,
-        <Link  className="nav-link active" to="/home" >Home</Link>,
-       <Link  className="nav-link active" to="/addProfile" >photo</Link>,
-        <button type="submit" className="btn btn-primary" onClick={()=>{
+        <Link  className="nav-link active" to="/profile" > 
+        <i className=" material-icons material-symbols-outlined" style={{float:"left"}}>person</i>
+        Profile</Link>,
+        <Link  className="nav-link active" to="/create" >
+          <i className="material-icons material-symbols-outlined" style={{float:"left"}}>add_box</i>
+          Create</Link>,
+        <Link  className="nav-link active" to="/home">
+          <i className="material-icons" style={{float:"left"}}>home</i>Home</Link>,
+          <Link  className="nav-link active" to="/searchUser">
+          <i className="material-icons" style={{float:"left"}}>search</i>Search</Link>,
+        <button type="submit" className="btn btn-primary ms-auto" style={{float:"right"}} onClick={()=>{
           localStorage.clear()
           dispatch({type:"CLEAR"})
           navigate("/signin")
@@ -22,26 +28,22 @@ const NavBar = () => {
 
       ]
     }else{
-      console.log("else",state)
       return [
-        <Link className="nav-link" to="/signin">SignIn</Link>,
+        <Link className="nav-link" to="/signin" style={{float:"left"}}>SignIn</Link>,
         
-        <Link  className="nav-link" to="/signup">SignUp</Link>
+        <Link  className="nav-link" to="/signup" style={{float:"right"}}>SignUp</Link>
       ]
     }
   }
   return (
     <nav  className="navbar navbar-expand-lg navbar-light bg-light">
-  <div  className="container-fluid">
+  <div  className="container-fluid" >
     <Link  className="navbar-brand" to={state?"/home":"/signin"}>INSTAGRAM</Link>
-    <button  className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span  className="navbar-toggler-icon"></span>
-    </button>
-    <div  className="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div  className="navbar-nav">
+    {/* <div  className="collapse " id="navbarNavAltMarkup"> */}
+      <div  className="navbar-nav" style={{display:'contents'}}>
         {routingList()}
       </div>
-    </div>
+    {/* </div> */}
   </div>
 </nav>
   );

@@ -13,7 +13,12 @@ var Post = mongoose.model('Post');
 
 var requireLogin = require('../middleware/requireLogin');
 
-var User = mongoose.model('User');
+var User = mongoose.model('User'); // router.get("/deletemodel",(req,res)=>{
+//     User.deleteMany({ }).then(res=>{
+//         console.log("deleted")
+//     })
+// })
+
 router.get("/user/:userId", requireLogin, function (req, res) {
   User.findOne({
     _id: req.params.userId
@@ -115,6 +120,20 @@ router.put('/createprofile', requireLogin, function (req, res) {
     }
 
     return res.json(response);
+  });
+});
+router.post('/search', requireLogin, function (req, res) {
+  var userPattern = new RegExp('^' + req.body.query);
+  User.find({
+    email: {
+      $regex: userPattern
+    }
+  }).then(function (posts) {
+    return res.json({
+      post: posts
+    });
+  })["catch"](function (err) {
+    console.log(err);
   });
 });
 module.exports = router;

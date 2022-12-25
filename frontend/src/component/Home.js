@@ -90,35 +90,41 @@ const Home = () => {
 
    }
     return (
-        <div>
-            {
+        <>
+         <>{console.log("data checking",data)}</>
+        {
+             data?<div>
+             { 
                 data.map(item=>{
-                    return(
-                        <div className="card" style={{width:"18rem",margin:"18px auto"}}>
-                <h5 className="card-title"><Link to={"/userProfile/"+item.postedby._id}>{item.postedby.name}</Link>
-                {item.postedby._id===state._id && <i className="material-icons" type="submit" style={{float:"right"}} onClick={()=>deletePost(item._id)}>delete</i>
-                }
-                </h5>
-                <div className="card-body">
-                <img className="card-img-top" src={item.picture} />
-
-                    <p className="card-text">{item.body}</p>
-                   {item.likes.includes(state._id)?
-                   <i className="material-icons material-symbols-outlined" style={{color:"black"}} type="submit" onClick={()=>unLikePost(item._id)}>favorite</i> :
-                   <i className="material-icons" type="submit" style={{color:"red"}} onClick={()=>likePost(item._id)}>favorite</i>}
-                   <i className="material-icons" type="submit"  onClick={()=>comments(item)}>comment</i>
-                   
-                </div>
-                
-            </div>
-
-                    )
-                })
-            }
+                     return(
+                         <div className="card" style={{width:"18rem",margin:"18px auto"}}>
+                 <h5 className="card-title" ><Link to={"/userProfile/"+item.postedby._id} style={{color:"black"}}>{item.postedby.name}</Link>
+                 {item.postedby._id===state._id && <i className="material-icons" type="submit" style={{float:"right"}} onClick={()=>deletePost(item._id)}>delete</i>
+                 }
+                 </h5>
+                 <div className="card-body">
+                 <img className="card-img-top" src={item.picture} />
+ 
+                     <p className="card-text">{item.body}</p>
+                    {item.likes.includes(state._id)?
+                    <i className="material-icons material-symbols-outlined" style={{color:"black"}} type="submit" onClick={()=>unLikePost(item._id)}>favorite</i> :
+                    <i className="material-icons material-symbols-outlined" type="submit" style={{color:"red",outlineColor:"black"}} onClick={()=>likePost(item._id)}>favorite</i>}
+                    <i className="material-icons material-symbols-outlined" type="submit"  onClick={()=>comments(item)}>comment</i>
+                    
+                 </div>
+                 
+             </div>
+ 
+                     )
+                 })
+                 
+             }
+             
             
-           
-        </div>
-
+         </div>: <h1>Loading</h1>
+        }
+        
+        </>
     )
 
 }

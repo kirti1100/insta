@@ -14,8 +14,8 @@ var Post = mongoose.model('Post');
 var requireLogin = require('../middleware/requireLogin');
 
 router.get('/allpost', requireLogin, function (req, res) {
-  Post.find().populate('postedby', '_id name').populate("comments.postedby", "_id name").then(function (posts) {
-    res.json({
+  Post.find().populate('postedby', '_id name').populate("comments.postedby", "_id name").sort("-createdAt").then(function (posts) {
+    return res.json({
       posts: posts
     });
   });
@@ -23,8 +23,8 @@ router.get('/allpost', requireLogin, function (req, res) {
 router.get('/mypost', requireLogin, function (req, res) {
   Post.find({
     postedby: req.user._id
-  }).populate('postedby', '_id name').populate("comments.postedby", "_id name").then(function (myposts) {
-    res.json({
+  }).populate('postedby', '_id name').populate("comments.postedby", "_id name").sort("-createdAt").then(function (myposts) {
+    return res.json({
       myposts: myposts
     });
   })["catch"](function (err) {
@@ -51,7 +51,7 @@ router.post('/createpost', requireLogin, function (req, res) {
     postedby: req.user
   });
   post.save().then(function (result) {
-    res.json({
+    return res.json({
       post: result
     });
   })["catch"](function (err) {
@@ -99,7 +99,7 @@ router.put("/comment", requireLogin, function (req, res) {
     }
   }, {
     "new": true
-  }).populate('comments.postedby', '_id name').populate('postedby', '_id name').exec(function (err, result) {
+  }).populate('comments.postedby', '_id name').populate('postedby', '_id name').sort("-createdAt").exec(function (err, result) {
     if (err) {
       return res.status(422).json(err);
     } else {

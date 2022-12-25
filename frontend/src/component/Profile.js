@@ -38,7 +38,7 @@ const Profile = () => {
                     width: "108%"
                 }}>
                     <h5>{posts.length} posts</h5>
-                    <h5>{state.followers.length} followers</h5>
+                    <h5>{state.followers.length} followers </h5>
                     <h5>{state.following.length} following</h5>
                 </div>
                 <div>

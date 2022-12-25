@@ -27,6 +27,7 @@ const Comments=()=>{
     const addComment=(event)=>{
         event.preventDefault()
         commentPost(state._id,event.target[0].value)
+        document.getElementById('formExample').value=''
     }
     const deleteComment=(commentId)=>{
         fetch(baseURL+`/deleteComment/${commentId}`,{
@@ -66,7 +67,7 @@ const Comments=()=>{
                         addComment(event)
                         
                     }}>
-                       <input type="text" placeholder='Add a comment' />
+                       <input type="text" id='formExample' placeholder='Add a comment' />
                     </form>
               </div>
               </div></>

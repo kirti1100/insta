@@ -4,8 +4,26 @@ const mongoose = require('mongoose')
 const User = mongoose.model('User')
 const brypt = require('bcryptjs')
 const JWT=require('jsonwebtoken')
-const {JWT_SCRET}=require('../config/key')
+const {JWT_SCRET,SEND_EMAIL_KEY}=require('../config/key')
 const RequireLogin=require('../middleware/requireLogin')
+
+// const nodemailer=require("nodemailer")
+// const sendgridtransport=require("nodemailer-sendgrid-transport")
+ 
+// const transport=nodemailer.createTransport(sendgridtransport({
+//     auth:{
+//         api_key:SEND_EMAIL_KEY
+//     }
+// }))
+// const transport=nodemailer.createTransport({
+//     host: 'smtp.ethereal.email',
+//     port: 587,
+//     auth: {
+//         user:"" ,
+//         pass: 'fVnukwywJCsPsUV4yy'
+//     }
+// })
+
 router.get('/protective',RequireLogin,(req,res)=>{
     res.send("hello user")
 })
@@ -41,6 +59,17 @@ router.post('/signup', (req, res) => {
                         user.save()
                             .then(user => {
                                 const token=JWT.sign({_id:user._id},JWT_SCRET)
+                                // transport.sendMail({
+                                //     to:user.email,
+                                //     from: "kirtigoyal444@gmail.com",
+                                //     subject: "signup successfully",
+                                //     text:"hello user",
+                                //     html: "<h1>welcome to instagram </h1>"
+                                // }).then(res=>{
+                                //     console.log(res,"email sent")
+                                // }).catch(err=>{
+                                //     console.log(err)
+                                // })
                                 return res.status(200).json({
                                     message: "successfully posted",
                                     token,
