@@ -75,7 +75,7 @@ const UserProfile = () => {
                 margin: "18px 0px"
             }}>
                 <div>
-                    <img style={{ width: "160px", height: "160px", borderRadius: "80px" }} src="https://images.unsplash.com/photo-1530577197743-7adf14294584?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzd8fHBlcnNvbnxlbnwwfDJ8MHx8&auto=format&fit=crop&w=500&q=60" />
+                    <img style={{ width: "160px", height: "160px", borderRadius: "80px" }} src={profile.user.picture}/>
                 </div>
                 <div>
                     <h3>{profile.user.name}</h3>
