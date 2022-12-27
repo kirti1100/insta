@@ -2,7 +2,7 @@ import React ,{useEffect, useState} from 'react'
 import { baseURL } from '../App'
 import {Link } from 'react-router-dom'
 const SearchUser=()=>{
-    const [data,setData]=useState([])
+    const [data,setData]=useState(null)
     const [name,setName]=useState(null)
     useEffect(()=>{
         if(name){
@@ -25,7 +25,7 @@ const SearchUser=()=>{
     const getName=(name)=>{
         console.log(name)
         if(name===''){
-            setData([])
+            setData(null)
         }
         setName(name) 
        

@@ -1,21 +1,22 @@
 import React ,{useState,useEffect,useContext}from 'react'
 import {UserContext,baseURL} from "../App"
-import {useNavigate,Link} from "react-router-dom"
+import {useNavigate,Link,useParams} from "react-router-dom"
 
-const Home = () => {
+const UserPost = () => {
     const navigate=useNavigate();
-    const [data,setData]=useState([])
-    const{state,dispatch}=useContext(UserContext)
-    const {value,dispatched}=useContext(UserContext)
+    const [data,setData]=useState(null)
+    const{state,dispatched}=useContext(UserContext)
+    const {userId}=useParams()
+    
     useEffect(()=>{
-        fetch(baseURL+"/allpost",{
-            method:"get",
+        fetch(baseURL+`/user/${userId}`,{
             headers:{
                 "Authorization":"bearer "+localStorage.getItem("jwt")
             }
         }).then(res=>res.json())
         .then(result=>{
-            setData(result.posts)
+            console.log("result",state)
+            setData(result.post)
         })
     },[])
     const likePost=(id)=>{
@@ -67,7 +68,7 @@ const Home = () => {
     }
     
    const comments=(item)=>{
-    dispatched({type:"comment",payload:item})
+    dispatched({type:"commented",payload:item})
     navigate("/comment")
     
    }
@@ -92,21 +93,32 @@ const Home = () => {
    }
     return (
         <>
-         <>{console.log("data checking",data)}</>
+        {console.log("check data",data)}
         {
-             data?<div>
+             data?
+             <div style={{width:"18rem",margin:"18px auto"}}>
+            <nav>
+              <Link to={"/userProfile/"+userId}>
+                <i className=" material-icons material-symbols-outlined" style={{ color:  "black", float:"left", marginTop:"20px"}}>arrow_back</i>
+                </Link>
+                <h1 style={{textAlign:"center"}}>Posts</h1>
+            </nav>
              { 
                 data.map(item=>{
+                    {console.log("check item",item)}
                      return(
-                         <div className="card" style={{width:"18rem",margin:"18px auto"}}>
-                 <h5 className="card-title" >
+                        
+                     <div className="card" style={{width:"18rem",margin:"18px auto"}}>
+                            
+                 <div className="card-title" >
                     { item.postedby._id!==state._id ?
                     <Link to={"/userProfile/"+item.postedby._id} style={{color:"black"}}>{item.postedby.name}</Link> 
                     : <Link to={"/profile"} style={{color:"black"}}>{item.postedby.name}</Link>}
                     
                  {item.postedby._id===state._id && <i className="material-icons" type="submit" style={{float:"right"}} onClick={()=>deletePost(item._id)}>delete</i>
                  }
-                 </h5>
+                 </div>
+                 
                  <div className="card-body">
                  <img className="card-img-top" src={item.picture} />
  
@@ -119,14 +131,17 @@ const Home = () => {
                  </div>
                  
              </div>
+             
  
                      )
+                     
                  })
                  
              }
              
             
          </div>: <h1>Loading</h1>
+         
         }
         
         </>
@@ -134,4 +149,4 @@ const Home = () => {
 
 }
 
-export default Home;
+export default UserPost;

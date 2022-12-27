@@ -37,7 +37,7 @@ const Profile = () => {
                     justifyContent: "space-around",
                     width: "108%"
                 }}>
-                    <h5>{posts.length} posts</h5>
+                    <Link to="/myposts" style={{color:"black"}}><h5>{posts.length} posts</h5></Link>
                     <h5>{state.followers.length} followers </h5>
                     <h5>{state.following.length} following</h5>
                 </div>
@@ -51,28 +51,18 @@ const Profile = () => {
 
         </div>
         <div className='status'>
-            <figure className="figure">
+            {/* <figure className="figure">
             <img style={{ width: "100px", height: "100px", borderRadius: "50px" }} src="https://images.unsplash.com/photo-1519625594242-7db544018926?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHBlcnNvbnxlbnwwfDJ8MHx8&auto=format&fit=crop&w=500&q=60" />
             <figcaption className="figure-caption">looks</figcaption>
-            </figure>
-            <figure className="figure">
-            <img style={{ width: "100px", height: "100px", borderRadius: "50px" }} src="https://images.unsplash.com/photo-1519625594242-7db544018926?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHBlcnNvbnxlbnwwfDJ8MHx8&auto=format&fit=crop&w=500&q=60" />
-            <figcaption className="figure-caption">looks</figcaption>
-            </figure>
-            <figure className="figure">
-            <img style={{ width: "100px", height: "100px", borderRadius: "50px" }} src="https://images.unsplash.com/photo-1519625594242-7db544018926?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHBlcnNvbnxlbnwwfDJ8MHx8&auto=format&fit=crop&w=500&q=60" />
-            <figcaption className="figure-caption">looks</figcaption>
-            </figure>
-            <figure className="figure">
-            <img style={{ width: "100px", height: "100px", borderRadius: "50px" }} src="https://images.unsplash.com/photo-1519625594242-7db544018926?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHBlcnNvbnxlbnwwfDJ8MHx8&auto=format&fit=crop&w=500&q=60" />
-            <figcaption className="figure-caption">looks</figcaption>
-            </figure>
+            </figure> */}
         </div>
         <div className='gallery'>
             {
                 posts.map(item=>{
                     return(
+                        <Link to={"/myposts"}>
                         <img key={item._id} className="item" src={item.picture} alt={item.title}/>
+                        </Link>
                     )
                 })
             }

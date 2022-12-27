@@ -10,10 +10,13 @@ import './App.css'
 import {BrowserRouter,Routes,Route,useNavigate} from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
-import {intialState,reducer} from "./reducers/userReducer";
+import {intialState,userReducer} from "./reducers/userReducer";
+import { initialvalue,postReducer } from './reducers/postReducer'
 import Comments from './component/Comments'
 import AddProfile  from './component/AddProfile';
 import SearchUser from './component/SearchUser';
+import MyPost from './component/MyPosts';
+import UserPost from './component/UserPost'
 export const UserContext = createContext();
 export const baseURL= process.env.REACT_APP_SERVER_URL
 
@@ -44,16 +47,18 @@ const Routing=()=>{
       <Route path="/userProfile/:userId" element={<UserProfile/>}/>
       <Route path="/addProfile" element={<AddProfile/>}/>
       <Route path="/searchUser" element={<SearchUser/>}/>
+      <Route path="/myposts" element={<MyPost/>}/>
+      <Route path="/userposts/:userId" element={<UserPost/>}/>
     </Routes>
   )
 }
 
 
 function App() {
-  const[state,dispatch]=useReducer(reducer,intialState)
-  
+  const[state,dispatch]=useReducer( userReducer,intialState)
+  const [value,dispatched]=useReducer(postReducer,initialvalue)
   return (
-    <UserContext.Provider value={{state,dispatch}}>
+    <UserContext.Provider value={{state,dispatch,value,dispatched}}>
     <BrowserRouter>
     <NavBar />
     <Routing />

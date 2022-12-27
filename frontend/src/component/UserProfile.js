@@ -1,6 +1,6 @@
 import React ,{useState,useEffect,useContext}from 'react'
 import {UserContext,baseURL} from "../App"
-import {useParams} from "react-router-dom"
+import {useParams,Link} from "react-router-dom"
 const UserProfile = () => {
     const {state,dispatch}=useContext(UserContext)
     const [profile,setProfile]=useState(null)
@@ -84,7 +84,7 @@ const UserProfile = () => {
                         justifyContent: "space-around",
                         width: "108%"
                     }}>
-                        <h5>{profile.post.length} posts</h5>
+                        <Link to={"/userposts/"+profile.user._id}><h5>{profile.post.length} posts</h5></Link>
                         <h5>{profile.user.followers.length} followers</h5>
                         <h5>{profile.user.following.length} following</h5>
                     </div>
@@ -104,28 +104,19 @@ const UserProfile = () => {
 
             </div>
             <div className='status'>
-                <figure className="figure">
+                {/* <figure className="figure">
                 <img style={{ width: "100px", height: "100px", borderRadius: "50px" }} src="https://images.unsplash.com/photo-1519625594242-7db544018926?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHBlcnNvbnxlbnwwfDJ8MHx8&auto=format&fit=crop&w=500&q=60" />
                 <figcaption className="figure-caption">looks</figcaption>
-                </figure>
-                <figure className="figure">
-                <img style={{ width: "100px", height: "100px", borderRadius: "50px" }} src="https://images.unsplash.com/photo-1519625594242-7db544018926?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHBlcnNvbnxlbnwwfDJ8MHx8&auto=format&fit=crop&w=500&q=60" />
-                <figcaption className="figure-caption">looks</figcaption>
-                </figure>
-                <figure className="figure">
-                <img style={{ width: "100px", height: "100px", borderRadius: "50px" }} src="https://images.unsplash.com/photo-1519625594242-7db544018926?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHBlcnNvbnxlbnwwfDJ8MHx8&auto=format&fit=crop&w=500&q=60" />
-                <figcaption className="figure-caption">looks</figcaption>
-                </figure>
-                <figure className="figure">
-                <img style={{ width: "100px", height: "100px", borderRadius: "50px" }} src="https://images.unsplash.com/photo-1519625594242-7db544018926?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHBlcnNvbnxlbnwwfDJ8MHx8&auto=format&fit=crop&w=500&q=60" />
-                <figcaption className="figure-caption">looks</figcaption>
-                </figure>
+                </figure> */}
+               
             </div>
             <div className='gallery'>
                 {
                     profile.post.map(item=>{
                         return(
+                            <Link to={"/userposts/"+item.postedby._id}>
                             <img key={item._id} className="item" src={item.picture} alt={item.title}/>
+                            </Link>
                         )
                     })
                 }

@@ -29,6 +29,7 @@ const CreatPost = () => {
                 toast(data.error, { hideProgressBar: true, autoClose: 2000, type: 'error' ,position:'top-right' })
       
               }else{
+                
                 toast("posted successfully", { hideProgressBar: true, autoClose: 2000, type: 'success' ,position:'top-right' })
                 navigate("/profile")
               }
@@ -60,7 +61,7 @@ const CreatPost = () => {
         <div style={{textAlign:"center"}}>
             <div className="card" style={{ width: "18rem", margin: "18px auto" }}>
                 <input className="card-title" type="text" placeholder="Title" value={title} onChange={(e)=>{setTitle(e.target.value)}}/>
-                <input className="card-text" type="text" placeholder="body" value={body} onChange={(e)=>{setBody(e.target.value)}}/>
+                <input className="card-text" type="text" placeholder="Add a caption." value={body} onChange={(e)=>{setBody(e.target.value)}}/>
                 <input className="btn" type="file" onChange={(e)=>{setFile(e.target.files[0])}}/>
                 <div>
                     <button type="submit" className="btn btn-primary" onClick={postdata}>

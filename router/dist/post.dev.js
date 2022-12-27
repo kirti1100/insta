@@ -31,6 +31,19 @@ router.get('/mypost', requireLogin, function (req, res) {
     console.log(err);
   });
 });
+router.get('/userPost', requireLogin, function (req, res) {
+  Post.find({
+    postedby: {
+      $in: req.user.following
+    }
+  }).populate('postedby', '_id name').populate("comments.postedby", "_id name").sort("-createdAt").then(function (myposts) {
+    return res.json({
+      myposts: myposts
+    });
+  })["catch"](function (err) {
+    console.log(err);
+  });
+});
 router.post('/createpost', requireLogin, function (req, res) {
   var _req$body = req.body,
       title = _req$body.title,
@@ -99,7 +112,7 @@ router.put("/comment", requireLogin, function (req, res) {
     }
   }, {
     "new": true
-  }).populate('comments.postedby', '_id name').populate('postedby', '_id name').sort("-createdAt").exec(function (err, result) {
+  }).populate('postedby', '_id name').populate("comments.postedby", "_id name").exec(function (err, result) {
     if (err) {
       return res.status(422).json(err);
     } else {
@@ -110,7 +123,7 @@ router.put("/comment", requireLogin, function (req, res) {
 router["delete"]("/delete/:postId", requireLogin, function (req, res) {
   Post.findOne({
     _id: req.params.postId
-  }).populate("postedby", "_id").exec(function (err, post) {
+  }).populate("postedby", "_id").populate("comments.postedby", "_id name").exec(function (err, post) {
     if (err || !post) {
       return res.status(422).json({
         error: err
@@ -127,11 +140,10 @@ router["delete"]("/delete/:postId", requireLogin, function (req, res) {
   });
 });
 router["delete"]("/deleteComment/:commentId", requireLogin, function (req, res) {
-  Post.findOneAndUpdate({
-    $pull: {
-      comments: req.params.commentId
-    }
-  }).populate("postedby", "_id").exec(function (err, post) {
+  //Post.findOneAndUpdate({$pull:{comments:req.params.commentId}})
+  Post.findOne({
+    _id: req.body.postId
+  }).populate("postedby", "_id name").populate("comments.postedby", "_id name").exec(function (err, post) {
     if (err || !post) {
       return res.status(422).json({
         error: err
@@ -139,6 +151,8 @@ router["delete"]("/deleteComment/:commentId", requireLogin, function (req, res) 
     }
 
     post.comments.map(function (comment) {
+      console.log("check", comment);
+
       if (comment._id.toString() === req.params.commentId.toString()) {
         comment.remove();
       }
