@@ -61,7 +61,7 @@ const Comments=()=>{
                 data.comments.map(record=>{
                     return(
                         <h6><span>{record.postedby.name} </span>{record.text}
-                        {record.postedby._id === value.postedby._id &&
+                        {record.postedby._id === state._id &&
                         <i className="material-icons" type="submit" style={{float:"right"}} onClick={()=>deleteComment(record._id)}>delete</i>}
                         </h6>
                     )
