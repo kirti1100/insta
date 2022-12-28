@@ -18,7 +18,7 @@ const Profile = () => {
     },[])
     return (
         <>
-        <>{console.log("state posts",posts)}</>
+        <>{console.log("state posts",state)}</>
         { posts ? <div style={{ maxWidth: "550px", margin: "0px auto" }}>
         <div style={{
             display: "flex",
@@ -38,7 +38,7 @@ const Profile = () => {
                     width: "108%"
                 }}>
                     <Link to="/myposts" style={{color:"black"}}><h5>{posts.length} posts</h5></Link>
-                    <h5>{state.followers.length} followers </h5>
+                    <Link to="/followers" ><h5>{state.followers.length} followers </h5></Link>
                     <h5>{state.following.length} following</h5>
                 </div>
                 <div>

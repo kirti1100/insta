@@ -15,7 +15,7 @@ const UserProfile = () => {
             console.log("result",result)
             setProfile(result)
         })
-    },[])
+    },[state])
 
     const followers=()=>{
         fetch(baseURL+"/follow",{
@@ -92,6 +92,7 @@ const UserProfile = () => {
                         <h5>Big Sur</h5>
                         <h5>welcome to my profile</h5>
                     </div>
+                    {console.log(profile.user.followers.includes(state._id),profile.user,state._id)}
                     {profile.user.followers.includes(state._id)?<button type="submit" className="btn btn-primary" onClick={()=>unFollow()}>
                        UnFollow
                     </button>:<button type="submit" className="btn btn-primary" onClick={()=>followers()}>

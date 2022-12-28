@@ -39,6 +39,8 @@ router.put("/follow",requireLogin,(req,res)=>{
     },{                                            
         new:true
     })
+    .populate("followers","_id name")
+    .populate("following","_id name")
     .exec((err,result)=>{
         if(err){
             return res.status(422).json(err)
@@ -47,10 +49,13 @@ router.put("/follow",requireLogin,(req,res)=>{
             $push:{following:req.body.followId}
         },{                                            
             new:true
-        }).select("-password"). exec((err,response)=>{
+        }).populate("followers","_id name")
+        .populate("following","_id name")
+        .select("-password"). exec((err,response)=>{
             if(err){
                 return res.status(422).json(err)
             }else{
+                console.log("result",response,result)
                 return res.json({user:result,logedinUser:response})
             }
         })
@@ -65,6 +70,8 @@ router.put("/unFollow",requireLogin,(req,res)=>{
     },{                                            
         new:true
     })
+    .populate("followers","_id name")
+    .populate("following","_id name")
     .select("-password")
     .exec((err,result)=>{
         if(err){
@@ -74,10 +81,14 @@ router.put("/unFollow",requireLogin,(req,res)=>{
             $pull:{following:req.body.unFollowId}
         },{                                            
             new:true
-        }).exec((err,response)=>{
+        })
+        .populate("followers","_id name")
+        .populate("following","_id name")
+        .exec((err,response)=>{
             if(err){
                 return res.status(422).json(err)
             }else{
+                console.log("result",response,result)
                 return res.json({user:result,logedinUser:response})
             }
         })

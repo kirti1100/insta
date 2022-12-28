@@ -16,6 +16,7 @@ import Comments from './component/Comments'
 import AddProfile  from './component/AddProfile';
 import SearchUser from './component/SearchUser';
 import MyPost from './component/MyPosts';
+import FollowersList from './component/FollowersList'
 import UserPost from './component/UserPost'
 export const UserContext = createContext();
 export const baseURL= process.env.REACT_APP_SERVER_URL
@@ -49,6 +50,8 @@ const Routing=()=>{
       <Route path="/searchUser" element={<SearchUser/>}/>
       <Route path="/myposts" element={<MyPost/>}/>
       <Route path="/userposts/:userId" element={<UserPost/>}/>
+      <Route path="/followers" element={<FollowersList/>}/>
+
     </Routes>
   )
 }

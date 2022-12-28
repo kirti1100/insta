@@ -120,7 +120,8 @@ const MyPost = () => {
  
                      <p className="card-text">{item.body}</p>
                     {item.likes.includes(state._id)?
-                    <i className="material-icons material-symbols-outlined" style={{color:"black"}} type="submit" onClick={()=>unLikePost(item._id)}>favorite</i> :
+                    <i className="material-icons material-symbols-outlined" style={{color:"black"}} type="submit" onClick={()=>unLikePost(item._id)}>favorite</i>
+                     :
                     <i className="material-icons material-symbols-outlined" type="submit" style={{color:"red",outlineColor:"black"}} onClick={()=>likePost(item._id)}>favorite</i>}
                     <i className="material-icons material-symbols-outlined" type="submit"  onClick={()=>comments(item)}>comment</i>
                     
