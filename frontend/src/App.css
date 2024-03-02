@@ -24,7 +24,11 @@
     text-align: center;
 
  }
+
 a{
     text-decoration: none;
     color: black;
  }
+.explore{
+    transition: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+}

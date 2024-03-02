@@ -1,6 +1,6 @@
-import React ,{useState,useEffect,useContext}from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import {UserContext,baseURL} from "../App"
+import { UserContext, baseURL } from "../App"
 const Profile = () => {
     const {state,dispatch}=useContext(UserContext)
     const [posts,setPosts]=useState(null)

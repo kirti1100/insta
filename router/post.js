@@ -7,8 +7,9 @@ const requireLogin=require('../middleware/requireLogin')
 
 router.get('/allpost',requireLogin,(req,res)=>{
     Post.find()
-    .populate('postedby','_id name')
+    .populate('postedby','_id name picture')
     .populate("comments.postedby","_id name")
+    .populate("likes","_id name")
     .sort("-createdAt")
     .then(posts=>{
         return res.json({posts})
@@ -19,6 +20,7 @@ router.get('/mypost',requireLogin,(req,res)=>{
     Post.find({postedby:req.user._id})
     .populate('postedby','_id name')
     .populate("comments.postedby","_id name")
+    .populate("likes","_id name")
     .sort("-createdAt")
     .then(myposts=>{
         return res.json({myposts})
@@ -32,6 +34,7 @@ router.get('/userPost',requireLogin,(req,res)=>{
     Post.find({postedby:{$in:req.user.following}})
     .populate('postedby','_id name')
     .populate("comments.postedby","_id name")
+    .populate("likes","_id name")
     .sort("-createdAt")
     .then(myposts=>{
         return res.json({myposts})
@@ -112,7 +115,8 @@ router.put("/comment",requireLogin,(req,res)=>{
         new:true
     })
     .populate('postedby','_id name')
-    .populate("comments.postedby","_id name")
+    .populate("comments.postedby","_id name picture")
+    .populate("likes","_id name")
     .exec((err,result)=>{
         if(err){
             return res.status(422).json(err)
@@ -126,6 +130,7 @@ router.delete("/delete/:postId",requireLogin,(req,res)=>{
     Post.findOne({_id:req.params.postId})
     .populate("postedby","_id")
     .populate("comments.postedby","_id name")
+    .populate("likes","_id name")
     .exec((err,post)=>{
         if(err || !post){
             return res.status(422).json({error:err})
@@ -146,6 +151,7 @@ router.delete("/deleteComment/:commentId",requireLogin,(req,res)=>{
     Post.findOne({_id:req.body.postId})
     .populate("postedby","_id name")
     .populate("comments.postedby","_id name")
+    .populate("likes","_id name")
     .exec((err,post)=>{
         if(err || !post){
             return res.status(422).json({error:err})

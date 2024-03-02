@@ -1,3 +1,4 @@
+
 export const intialState=null;
 export const userReducer=(state,action)=>{
     if(action.type==="USER"){
@@ -9,6 +10,7 @@ export const userReducer=(state,action)=>{
     if(action.type==="CLEAR"){
         return null;
     }
+
     if(action.type==="UPDATED"){
         console.log("check state",state)
         return{
