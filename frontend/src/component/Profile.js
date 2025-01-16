@@ -19,11 +19,12 @@ const Profile = () => {
     return (
         <>
         <>{console.log("state posts",state)}</>
-        { posts ? <div style={{ maxWidth: "550px", margin: "0px auto" }}>
+        { posts ? <div style={{ maxWidth: "800px", margin: "0px auto" }}>
         <div style={{
             display: "flex",
             justifyContent: "space-around",
-            margin: "18px 0px"
+            margin: "18px 0px",
+            borderBottom:"1px solid black"
         }}>
             <div>
                <Link to="/addProfile">
@@ -39,7 +40,7 @@ const Profile = () => {
                 }}>
                     <Link to="/myposts" style={{color:"black"}}><h5>{posts.length} posts</h5></Link>
                     <Link to="/followers" ><h5>{state.followers.length} followers </h5></Link>
-                    <h5>{state.following.length} following</h5>
+                    <Link to="/following" ><h5>{state.following.length} following</h5></Link>
                 </div>
                 <div>
                     <h5>Big Sur</h5>
@@ -50,12 +51,7 @@ const Profile = () => {
             </div>
 
         </div>
-        <div className='status'>
-            {/* <figure className="figure">
-            <img style={{ width: "100px", height: "100px", borderRadius: "50px" }} src="https://images.unsplash.com/photo-1519625594242-7db544018926?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHBlcnNvbnxlbnwwfDJ8MHx8&auto=format&fit=crop&w=500&q=60" />
-            <figcaption className="figure-caption">looks</figcaption>
-            </figure> */}
-        </div>
+        
         <div className='gallery'>
             {
                 posts.map(item=>{
@@ -69,6 +65,7 @@ const Profile = () => {
         </div>
     </div> : <h1>Loading.......</h1>}
     </>
+        
         
     )
 

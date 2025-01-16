@@ -8,7 +8,7 @@ const NavBar1 = () => {
   const navigate = useNavigate();
   const [result,setResult]=useState([]);
   const [isOpen,setIsOpen]=useState(false);
-  const { state, value1, dispatched1 } = useContext(UserContext);
+  const { state,dispatch, value1, dispatched1 } = useContext(UserContext);
 
   useEffect(()=>{
     if(state){
@@ -81,90 +81,7 @@ const NavBar1 = () => {
 
      }
   ]
-  // const routingList = () => {
-  //   if (state) {
-  //     return [
-  //       <Link className="nav-link" to="/home">
-  //         <i className="material-icons" style={{ float: "left"}}>
-  //           home
-  //         </i>
-  //         Home
-  //       </Link>,
-  //       <Link className="nav-link active" to="/searchUser">
-  //         <i className="material-icons search" style={{ float: "left" }}>
-  //           search
-  //         </i>
-  //         Search
-  //       </Link>,
-  //       <Link className="nav-link active" to="/explore">
-  //       <i className="material-icons sidenav-trigger show-on-large"  data-target= "slide-out" style={{ float: "left" }}>
-  //         explore
-  //       </i>
-  //       explore
-  //     </Link>,
-  //       <Link className="nav-link active" to="/reels">
-  //       <i className="material-icons" style={{ float: "left" }}>
-  //         movie
-  //       </i>
-  //       reels
-  //     </Link>,
-  //     <Link className="nav-link active" to="/messages">
-  //     <i className="material-icons" style={{ float: "left" }}>
-  //       message
-  //     </i>
-  //     messages
-  //   </Link>,
-  //   <Link className="nav-link active" to="/notification">
-  //   <i className="material-icons" style={{ float: "left" }}>
-  //   favorite
-  //   </i>
-  //   Notification
-  // </Link>,
-  //     <Link className="nav-link active" to="/create">
-  //     <i
-  //       className="material-icons material-symbols-outlined"
-  //       style={{ float: "left" }}
-  //     >
-  //       add_box
-  //     </i>
-  //     Create
-  //   </Link>,
-  //       <Link className="nav-link active" to="/profile">
-  //         <i
-  //           className=" material-icons material-symbols-outlined"
-  //           style={{ float: "left" }}
-  //         >
-  //           person
-  //         </i>
-  //         Profile
-  //       </Link>,
-        
-
-  //       <button
-  //         type="submit"
-  //         className="btn btn-primary"
-  //         style={{ float: "left" }}
-  //         onClick={() => {
-  //           localStorage.clear();
-  //           dispatch({ type: "CLEAR" });
-  //           navigate("/signin");
-  //         }}
-  //       >
-  //         Logout
-  //       </button>,
-  //     ];
-  //   } else {
-  //     return [
-  //       <Link className="nav-link" to="/signin" style={{ float: "left" }}>
-  //         SignIn
-  //       </Link>,
-
-  //       <Link className="nav-link" to="/signup" style={{ float: "right" }}>
-  //         SignUp
-  //       </Link>,
-  //     ];
-  //   }
-  // };
+  
   const toggle1=()=>{
     dispatched1({type:"toggle" ,payload:isOpen});
     setIsOpen(!isOpen);
@@ -191,6 +108,20 @@ const NavBar1 = () => {
             
             ))
           }
+          </div>
+          <div>
+          <button
+          type="submit"
+          className="btn btn-primary"
+          style={{ display: isOpen? "block" : "none" ,justifyContent:"center",marginLeft:"2px",width:"210px",marginBottom:"10px",borderRadius:"20px",backgroundColor:"slategrey" }}
+          onClick={() => {
+            localStorage.clear();
+            dispatch({ type: "CLEAR" });
+            navigate("/signin");
+          }}
+        >
+          Logout
+        </button>
           </div>
       </div>
     </div>

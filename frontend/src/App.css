@@ -9,11 +9,12 @@
 }
 .gallery{
     display: flex;
-    justify-content: space-around;
+   
     flex-wrap: wrap;
 }
 .item{
-    width:30%;
+    width:30vh;
+    height: 30vh;
 }
  .status{
     display: flex;

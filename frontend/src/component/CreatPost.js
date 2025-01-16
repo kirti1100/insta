@@ -1,7 +1,7 @@
-import React, { useState ,useEffect} from "react";
-import {useNavigate} from "react-router-dom";
-import {toast} from "react-toastify"
-import {baseURL} from '../App'
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { baseURL } from '../App';
 const CreatPost = () => {
     const [title,setTitle]=useState("")
     const[body,setBody]=useState("")
@@ -58,18 +58,29 @@ const CreatPost = () => {
         
     }   
     return (   
-        <div style={{textAlign:"center"}}>
-            <div className="card" style={{ width: "18rem", margin: "18px auto" }}>
-                <input className="card-title" type="text" placeholder="Title" value={title} onChange={(e)=>{setTitle(e.target.value)}}/>
-                <input className="card-text" type="text" placeholder="Add a caption." value={body} onChange={(e)=>{setBody(e.target.value)}}/>
-                <input className="btn" type="file" onChange={(e)=>{setFile(e.target.files[0])}}/>
-                <div>
-                    <button type="submit" className="btn btn-primary" onClick={postdata}>
-                        Submit
-                    </button>
-                </div>
-            </div>
-        </div>
+      <div className="card" style={{width:"350px",height:"55vh",margin:"170px auto",position:"relative",borderRadius:"15px"}}>
+      <h5 style={{textAlign:"center"}}>Create new post</h5>
+      <div className='status' style={{width:"350px"}}></div>
+      <div style={{alignItems:"center",display:"flex",justifyContent:"center",marginTop:"47px"}}>
+        <i className="material-icons navicon" style={{fontSize:"100px"}}>collections</i>
+      </div>
+      <div className="mb-3 card-body" style={{textAlign:"center"}}>
+      <input className="card-title" type="text" placeholder="Title" value={title} onChange={(e)=>{setTitle(e.target.value)}}/>
+       <input className="card-text" type="text" placeholder="Add a caption." value={body} onChange={(e)=>{setBody(e.target.value)}}/>
+      
+      <h4 style={{textAlign:"center",fontWeight:"normal"}}> Drag photos and videos here</h4>
+      <div className="" style={{alignContent:"center",justifyContent:"center",marginTop:"10px"}}>
+      <input  type="file" onChange={(e)=>{setFile(e.target.files[0])}}/>
+      <div style={{textAlign:"center"}}>
+                 <button type="submit" className="btn-primary" onClick={postdata}>
+                      Submit
+                 </button>
+             </div>
+
+      </div>
+      </div>
+
+      </div>
     )
 };
 
